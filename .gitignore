@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+work-report.md
+CampusFlow_Work_Report.docx
 
 # Editor directories and files
 .vscode/*

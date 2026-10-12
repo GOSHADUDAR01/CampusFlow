@@ -102,7 +102,7 @@ app.innerHTML = `
       <section class="catalog-layout" aria-label="Каталог мероприятий">
         <aside class="filters-panel" aria-label="Фильтры мероприятий">
           <h2>Фильтры</h2>
-          <div class="filter-group" role="list">
+          <div class="filter-group" role="group" aria-label="Категории мероприятий">
             <button class="filter-chip is-active" type="button">Все</button>
             <button class="filter-chip" type="button">Frontend</button>
             <button class="filter-chip" type="button">Backend</button>
@@ -119,17 +119,17 @@ app.innerHTML = `
                 <option>Следующая неделя</option>
               </select>
             </div>
-            <div class="facet-item">
-              <label>Формат</label>
+            <fieldset class="facet-item">
+              <legend>Формат</legend>
               <label class="check-row"><input type="checkbox" checked /> Очно</label>
               <label class="check-row"><input type="checkbox" /> Онлайн</label>
-            </div>
-            <div class="facet-item">
-              <label>Уровень</label>
+            </fieldset>
+            <fieldset class="facet-item">
+              <legend>Уровень</legend>
               <label class="check-row"><input type="radio" name="level" checked /> Для всех</label>
               <label class="check-row"><input type="radio" name="level" /> Начальный</label>
               <label class="check-row"><input type="radio" name="level" /> Продвинутый</label>
-            </div>
+            </fieldset>
             <button class="primary-button" type="button">Применить</button>
           </div>
         </aside>

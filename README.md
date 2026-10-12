@@ -18,16 +18,22 @@ npm run format:check
 npm run build
 ```
 
+## Точная вёрстка
+
+Правила геометрии, контрольные размеры, выбор CSS-единиц и результаты стресс-тестов
+описаны в [листе измерений](./layout-measurements.md). Исходные изображения макета:
+`1.jpe` и `2.jpe`.
+
 ## Структура проекта
 
 ```text
 src/
-  data/
-    events.js
   main.js
   style.css
 public/
-.decomposition.md
+screenshots/
+layout-measurements.md
+decomposition.md
 README.md
 ```
 
