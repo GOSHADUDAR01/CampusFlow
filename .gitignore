@@ -13,6 +13,8 @@ dist-ssr
 *.local
 work-report.md
 CampusFlow_Work_Report.docx
+practice-4-report.md
+practice-4-report.docx
 
 # Editor directories and files
 .vscode/*

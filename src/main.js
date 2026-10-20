@@ -1,152 +1,241 @@
 import './style.css';
 
-const events = [
+import booksCover from './assets/projects/books.svg';
+import ecoCover from './assets/projects/eco.svg';
+import eventsCover from './assets/projects/events.svg';
+import financeCover from './assets/projects/finance.svg';
+import helpCover from './assets/projects/help.svg';
+import notesCover from './assets/projects/notes.svg';
+import routesCover from './assets/projects/routes.svg';
+import tasksCover from './assets/projects/tasks.svg';
+
+const projects = [
   {
-    id: 1,
-    title: 'Семантический HTML',
-    category: 'Frontend',
-    date: '18 сен',
-    time: '16:00',
-    venue: 'ауд. 304',
-    seats: 18,
-    favorite: false,
+    name: 'Help Desk',
+    category: 'Веб-приложение',
+    level: 'Средний',
+    description: 'Сервис обработки заявок',
+    technology: 'Java · Spring Boot',
+    tasks: 8,
+    date: '12 окт 2026',
+    image: helpCover,
   },
   {
-    id: 2,
-    title: 'Git без страха',
-    category: 'Инструменты',
-    date: '19 сен',
-    time: '14:30',
-    venue: 'online',
-    seats: 8,
-    favorite: true,
+    name: 'TaskFlow',
+    category: 'Интерфейс',
+    level: 'Базовый',
+    description: 'Доска задач команды',
+    technology: 'React · TypeScript',
+    tasks: 6,
+    date: '16 окт 2026',
+    image: tasksCover,
   },
   {
-    id: 3,
-    title: 'UX-разбор интерфейсов',
-    category: 'UX/UI',
-    date: '21 сен',
-    time: '17:00',
-    venue: 'коворкинг',
-    seats: 5,
-    favorite: false,
+    name: 'EcoMonitor',
+    category: 'Аналитика',
+    level: 'Сложный',
+    description: 'Мониторинг городской среды',
+    technology: 'Python · FastAPI',
+    tasks: 10,
+    date: '18 окт 2026',
+    image: ecoCover,
   },
   {
-    id: 4,
-    title: 'REST API на практике',
-    category: 'Backend',
-    date: '23 сен',
-    time: '15:00',
-    venue: 'ауд. 211',
-    seats: 14,
-    favorite: false,
+    name: 'BookSpace',
+    category: 'Веб-приложение',
+    level: 'Базовый',
+    description: 'Каталог электронной библиотеки',
+    technology: 'HTML · CSS · JS',
+    tasks: 5,
+    date: '21 окт 2026',
+    image: booksCover,
+  },
+  {
+    name: 'FinTrack',
+    category: 'Аналитика',
+    level: 'Средний',
+    description: 'Личный учёт расходов',
+    technology: 'Vue · PostgreSQL',
+    tasks: 7,
+    date: '24 окт 2026',
+    image: financeCover,
+  },
+  {
+    name: 'EventHub',
+    category: 'Интерфейс',
+    level: 'Сложный',
+    description: 'Платформа мероприятий',
+    technology: 'Next.js · Prisma',
+    tasks: 9,
+    date: '27 окт 2026',
+    image: eventsCover,
+  },
+  {
+    name: 'StudyNotes',
+    category: 'Веб-приложение',
+    level: 'Средний',
+    description: 'Совместные конспекты',
+    technology: 'Java · Thymeleaf',
+    tasks: 8,
+    date: '30 окт 2026',
+    image: notesCover,
+  },
+  {
+    name: 'CityRoutes',
+    category: 'Интерфейс',
+    level: 'Сложный',
+    description: 'Планировщик городских маршрутов',
+    technology: 'JS · OpenStreetMap',
+    tasks: 11,
+    date: '2 ноя 2026',
+    image: routesCover,
   },
 ];
 
-const eventCards = events
+const projectCards = projects
   .map(
-    (event) => `
-      <article class="event-card" aria-label="Мероприятие ${event.title}">
-        <div class="event-card__header">
-          <span class="badge badge--${event.category.toLowerCase().replace(/\s+/g, '-')}">${event.category}</span>
-          <button class="favorite-button" type="button" aria-label="Добавить в избранное">
-            ${event.favorite ? '♥' : '♡'}
-          </button>
-        </div>
-        <h2>${event.title}</h2>
-        <p class="event-meta">${event.date} · ${event.time} · ${event.venue}</p>
-        <div class="event-footer">
-          <span>${event.seats} мест</span>
-          <a href="#" class="link-button">Подробнее</a>
+    (project) => `
+      <article class="project-card">
+        <img class="project-cover" src="${project.image}" alt="Иллюстрация проекта ${project.name}" />
+        <div class="project-body">
+          <div class="card-top">
+            <span class="badge">${project.category}</span>
+            <span class="level">${project.level}</span>
+          </div>
+          <h3>${project.name}</h3>
+          <p class="project-description">${project.description}</p>
+          <p class="tech">${project.technology}</p>
+          <div class="card-bottom">
+            <span>${project.tasks} задач</span>
+            <time>${project.date}</time>
+          </div>
+          <a class="card-link" href="#project-info">
+            Подробнее <span aria-hidden="true">↗</span>
+          </a>
         </div>
       </article>
     `,
   )
   .join('');
 
-const app = document.querySelector('#app');
+document.querySelector('#app').innerHTML = `
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="study/projects — на главную">
+        <span class="brand-icon" aria-hidden="true">◈</span>
+        <span>study<span class="brand-light">/projects</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Главное меню">
+        <a href="#projects" class="nav-active">Каталог</a>
+        <a href="#project-info">О проекте</a>
+        <a href="#footer">Контакты</a>
+      </nav>
+      <span class="header-note">Практическая работа № 4</span>
+    </div>
+  </header>
 
-app.innerHTML = `
-  <div class="page-shell">
-    <header class="site-header">
-      <div class="brand-wrap">
-        <div class="brand-mark">CF</div>
-        <div class="brand-text">
-          <span>CampusFlow</span>
+  <main class="container" id="top">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <span class="eyebrow">Веб-разработка и дизайн · модуль 4</span>
+        <h1 id="page-title">Каталог учебных<br class="desktop-break" /> проектов</h1>
+        <p>Изучайте реальные примеры интерфейсов. Сравнивайте технологии, сложность и состав задач.</p>
+      </div>
+      <div class="hero-stat" aria-label="Восемь проектов для практики и самостоятельной работы">
+        <strong>08</strong>
+        <span>проектов для практики<br class="desktop-break" /> и самостоятельной работы</span>
+      </div>
+    </section>
+
+    <div class="content-layout">
+      <aside class="filters" aria-label="Фильтры проектов">
+        <div class="sidebar-title">
+          <h2>Фильтры</h2>
+          <span aria-hidden="true">↗</span>
+        </div>
+        <fieldset>
+          <legend>Тип проекта</legend>
+          <label><input type="checkbox" checked /> Все проекты <em>8</em></label>
+          <label><input type="checkbox" /> Веб-приложение <em>3</em></label>
+          <label><input type="checkbox" /> Интерфейс <em>3</em></label>
+          <label><input type="checkbox" /> Аналитика <em>2</em></label>
+        </fieldset>
+        <fieldset>
+          <legend>Сложность</legend>
+          <label><input type="checkbox" /> Базовый</label>
+          <label><input type="checkbox" /> Средний</label>
+          <label><input type="checkbox" /> Сложный</label>
+        </fieldset>
+        <button type="button" class="reset">Сбросить фильтры</button>
+        <div class="aside-tip">
+          <span aria-hidden="true">ⓘ</span>
+          <p>Карточки должны одинаково выглядеть даже при разной длине описания.</p>
+        </div>
+      </aside>
+
+      <section id="projects" class="projects" aria-labelledby="catalog-title">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">Раздел 01 / каталог</span>
+            <h2 id="catalog-title">Проекты <span class="count">(8)</span></h2>
+          </div>
+          <div class="catalog-tools">
+            <label class="search-field">
+              <span class="sr-only">Поиск проектов</span>
+              <input type="search" placeholder="Найти проект" />
+            </label>
+            <label class="sort">
+              <span>Сортировка</span>
+              <select aria-label="Сортировка проектов">
+                <option>По названию</option>
+                <option>По сложности</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div class="cards-grid">${projectCards}</div>
+        <div class="pagination">
+          <span>Показано 8 из 8 проектов</span>
+          <a href="#projects" class="all-projects">Все проекты <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+    </div>
+
+    <section class="feature" id="project-info" aria-labelledby="feature-title">
+      <div class="feature-inner">
+        <div class="feature-copy">
+          <span class="eyebrow">Раздел 02 / специальный блок</span>
+          <h2 id="feature-title">От макета<br />к адаптивной системе</h2>
+          <p>Один интерфейс должен уверенно работать на телефоне, планшете и большом мониторе. Важна не только ширина карточки — меняются расположение, порядок и композиция блоков.</p>
+          <div class="feature-actions">
+            <a href="#projects" class="feature-primary">К каталогу <span aria-hidden="true">↗</span></a>
+            <a href="#footer" class="feature-secondary">Критерии проверки →</a>
+          </div>
+        </div>
+        <div class="feature-panel" aria-label="Шесть контрольных ширин экрана">
+          <div class="mini-title">
+            <span>Проверка адаптивности</span>
+            <span>01—06</span>
+          </div>
+          <div class="viewport-bars" aria-hidden="true">
+            <span style="--bar-width: 18%">320</span>
+            <span style="--bar-width: 26%">375</span>
+            <span style="--bar-width: 48%">768</span>
+            <span style="--bar-width: 64%">1024</span>
+            <span style="--bar-width: 88%">1440</span>
+            <span style="--bar-width: 100%">1920</span>
+          </div>
+          <p>Шесть контрольных ширин экрана</p>
         </div>
       </div>
-      <nav class="main-nav" aria-label="Основная навигация">
-        <a href="#" aria-current="page">Каталог</a>
-        <a href="#">Мои события</a>
-        <a href="#">Профиль</a>
-      </nav>
-      <button class="search-button" type="button" aria-label="Поиск">Поиск</button>
-    </header>
+    </section>
+  </main>
 
-    <main class="catalog-page">
-      <section class="catalog-intro" aria-labelledby="catalog-title">
-        <div>
-          <p class="eyebrow">Учебные мероприятия</p>
-          <h1 id="catalog-title">Найдите лекцию, мастер-класс или встречу по интересам</h1>
-        </div>
-        <div class="toolbar" aria-label="Панель каталога">
-          <label class="search-field">
-            <span class="sr-only">Поиск по названию</span>
-            <input type="search" placeholder="Поиск по названию или теме..." />
-          </label>
-          <button class="secondary-button" type="button">Сначала новые</button>
-          <button class="text-button" type="button">Сбросить</button>
-        </div>
-      </section>
-
-      <section class="catalog-layout" aria-label="Каталог мероприятий">
-        <aside class="filters-panel" aria-label="Фильтры мероприятий">
-          <h2>Фильтры</h2>
-          <div class="filter-group" role="group" aria-label="Категории мероприятий">
-            <button class="filter-chip is-active" type="button">Все</button>
-            <button class="filter-chip" type="button">Frontend</button>
-            <button class="filter-chip" type="button">Backend</button>
-            <button class="filter-chip" type="button">UX/UI</button>
-            <button class="filter-chip" type="button">Карьера</button>
-          </div>
-
-          <div class="facet-block">
-            <h3>Мои фильтры</h3>
-            <div class="facet-item">
-              <label for="date-filter">Дата</label>
-              <select id="date-filter" name="date-filter">
-                <option>На этой неделе</option>
-                <option>Следующая неделя</option>
-              </select>
-            </div>
-            <fieldset class="facet-item">
-              <legend>Формат</legend>
-              <label class="check-row"><input type="checkbox" checked /> Очно</label>
-              <label class="check-row"><input type="checkbox" /> Онлайн</label>
-            </fieldset>
-            <fieldset class="facet-item">
-              <legend>Уровень</legend>
-              <label class="check-row"><input type="radio" name="level" checked /> Для всех</label>
-              <label class="check-row"><input type="radio" name="level" /> Начальный</label>
-              <label class="check-row"><input type="radio" name="level" /> Продвинутый</label>
-            </fieldset>
-            <button class="primary-button" type="button">Применить</button>
-          </div>
-        </aside>
-
-        <section class="events-section" aria-label="Список мероприятий">
-          <div class="events-grid">${eventCards}</div>
-          <nav class="pagination" aria-label="Навигация по страницам">
-            <button type="button" aria-label="Предыдущая страница">‹</button>
-            <span class="pagination__page is-active">1</span>
-            <span class="pagination__page">2</span>
-            <span class="pagination__page">3</span>
-            <span>…</span>
-            <span class="pagination__page">8</span>
-            <button type="button" aria-label="Следующая страница">›</button>
-          </nav>
-        </section>
-      </section>
-    </main>
-  </div>
+  <footer class="site-footer" id="footer">
+    <div class="container footer-inner">
+      <strong>study/projects</strong>
+      <span>Grid · Flexbox · Container Queries</span>
+      <span>Учебный макет · 2026</span>
+    </div>
+  </footer>
 `;
